@@ -1,0 +1,99 @@
+package com.example.gadleaderapp.ui.fragment
+
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.RelativeSizeSpan
+import android.view.*
+import androidx.fragment.app.DialogFragment
+import com.example.gadleaderapp.R
+import kotlinx.android.synthetic.main.fragment_confirmation.*
+
+
+class ConfirmationDialogFragment : DialogFragment() {
+
+    var mListener: ConfirmationListener? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initDialog()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_confirmation, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+        }
+    }
+
+    fun initDialog() {
+        val dialog = getDialog()!!
+        val lp = dialog.window!!.attributes.apply {
+            width = WindowManager.LayoutParams.MATCH_PARENT
+            height = WindowManager.LayoutParams.MATCH_PARENT
+        }
+        dialog.window!!.attributes = lp
+        dialog.getWindow()!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+
+    fun init() {
+        val str = getString(R.string.are_you_sure)
+        val span = SpannableString(str)
+        val size = str.length
+        span.setSpan(RelativeSizeSpan(1.8f), size - 2, size, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        textView.setText(span)
+        btnYes.setOnClickListener {
+            dismiss()
+            mListener?.onConfirm()
+        }
+        btnClose.setOnClickListener { dismiss() }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ConfirmationListener)
+            mListener = context
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mListener = null
+    }
+
+    interface ConfirmationListener {
+        fun onConfirm()
+    }
+
+    companion object {
+        const val TAG = "confirmationDialog"
+
+        @JvmStatic
+        fun newInstance() =
+            ConfirmationDialogFragment().apply {
+                arguments = Bundle().apply {
+                }
+            }
+    }
+}
