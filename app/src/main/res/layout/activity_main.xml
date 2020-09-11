@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greyback"
+    android:background="@drawable/main_bg"
     android:orientation="vertical"
     tools:context=".ui.activity.MainActivity">
 
@@ -12,6 +12,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -44,6 +45,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/main_submit"
+
                     android:paddingStart="10dp"
                     android:paddingLeft="10dp"
                     android:paddingEnd="10dp"

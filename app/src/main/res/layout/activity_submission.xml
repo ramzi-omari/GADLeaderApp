@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/main_bg"
     android:orientation="vertical"
     tools:context=".ui.activity.SubmissionActivity">
 
@@ -12,16 +12,19 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:title="@string/app_name"
+
             app:titleTextColor="@color/white">
 
             <RelativeLayout
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent">
 
                 <FrameLayout
@@ -45,11 +48,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
+
                     android:layout_marginLeft="20dp"
                     android:layout_toEndOf="@id/backIcon"
                     android:layout_toRightOf="@id/backIcon"
                     android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/gads_banner" />
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/gads_banner_removebg_preview" />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
